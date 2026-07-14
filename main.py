@@ -1,65 +1,51 @@
-#expense tracker project
-expensesList= []    #list of expenses in the form of dictionary
-print(" WELCOME TO EXPENSE TRACKER: THINK BEFORE YOU BUY ANYTHING")
 
-while True:
-    print("======MENU======")
-    print("1. Add Expenses")
-    print("2. View All Expenses")
-    print("3. View Total kharcha ")
-    print("Exit")
+import datetime
+import time
 
-    choice=int(input(" Please Enter Your Choice: "))
+name=input("please enter your name:")
+presentHour=datetime.datetime.now().hour
+if 5 <= presentHour <=11:
+    print("Good Morning",name)
+elif 11<= presentHour <=17:
+    print("Good Afternoon",name)
+elif 17<= presentHour <=20:
+    print("Good Evening",name)
+else:
+    print("Good Night",name)
 
-# 1.add expenses
-    if(choice==1):
-        date=input(" kis date par kharcha kiya tha ?:")
-        category=input("kis type ka kharcha kiya tha? (food,travel,makeup,books,accessories):")
-        description=input("more details about the category of goods :")
-        amount=float(input("enter the amount :"))
+print("Namaste! Welcome to your Buddy Chatbot")
+print("you can ask me basic question, Type 'bye' to exit the chatbot.")
 
-        expense={
-            "date":date,
-            "category":category,
-            "description":description,
-            "amount":amount
-        }
 
-        expensesList.append(expense)
-        print("\n DONE DUDE. expenses is added successfully")
+#chatbot memory creation[dictionary of responses]
+
+responses = {
+    "hello": "hello! how can I help you?",
+    "how are you?": "i am very fine, Thank you",
+    "who are you?": "I am smart AI chatbot",
+    "motivate me": "you can do it, just believe in yourself",
+    "happy": "great!to hear that",
+    "function kya hote hai": "jakr chapter 7 padho"
+    
+}
+
+    
+# method/function to get response of bot
+
+def getResponseOfBot(userQuestion):
+    userQuestion=userQuestion.lower()
+    for eachkey in responses:
+        if eachkey in userQuestion:
+            return responses[eachkey]
         
+    return "i am not able to tell  that yet. mai jald hi yeh sikh lunga"
+#take user input
+while True:
+    userInput= input("please ask your question:")
+    reply= getResponseOfBot(userInput)
+    print("Bot Response:", reply)
 
-# 2.view all expenses
-    elif(choice==2):
-        if(len(expensesList)==0):
-            print("No Expenses Added. jao phle khrcha karo")
-        else:
-            print("==== This is All Your Expense====")
-            count=1
-            for eachkharcha in expensesList:
-                print(f"kharcha Number {count}-->  {eachkharcha["date"]},{eachkharcha["category"]},{eachkharcha["description"]},{eachkharcha["amount"]}")
-                count+=1
-
-#3.  view all spending 
-    elif(choice==3):
-        total=0
-        for eachkharcha in expensesList:
-            total=total + eachkharcha["amount"]
-            print("\n TOTAL KHARCHA =",total)
-
-#4. exit     
-    elif(choice==4):
-        print("DHANYAWAAD! apne hmara system use kiya")
+    if "bye" in userInput.lower():
         break
 
-    else:
-        print("INVALID CHOICE. try again")
-    
-    
-      
-
-
-                
-            
         
-
